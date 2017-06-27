@@ -1,1 +1,1 @@
-"#Avergae reponse generator" 
+Author Alain Mbungu and  Syntyche Shimbi 
