@@ -1,0 +1,20 @@
+//http://blog.dandyer.co.uk/2008/04/06/a-java-programmers-guide-to-random-numbers-part-2-not-just-coins-and-dice/
+Exponential Distribution
+
+The Exponential Distibution is related to the Poisson Distribution. Rather than modelling how many events occur in a fixed period of time, it models the period of time between two independent events that occur at a given average rate.
+
+Suppose you wanted to simulate some random event that happened on average 10 times a minute – perhaps you are simulating load for a server. You could simply generate events at the constant rate of exactly one every 6 seconds. But the real world is rarely this metronomic. A more realistic approach would be to generate events randomly, using an exponential distribution (provided by the ExponentialGenerator class) to determine the intervals between events:
+
+final long oneMinute = 60000;
+Random rng = new MersenneTwisterRNG();
+ 
+// Generate events at an average rate of 10 per minute.
+ExponentialGenerator gen = new ExponentialGenerator(10, rng);
+boolean running = true;
+while (true)
+{
+    long interval = Math.round(gen.nextValue() * oneMinute);
+    Thread.sleep(interval);
+ 
+    // Fire event here.
+}
